@@ -2,10 +2,10 @@ import React from "react";
 import { RecoilRoot } from 'recoil';
 import "antd/dist/antd.css";
 
-import Header from "./Header";
+import ResetButton from "./ResetButton";
 
 export default () => (
   <RecoilRoot>
-    <Header />
+    Hola <ResetButton />
   </RecoilRoot>
 );

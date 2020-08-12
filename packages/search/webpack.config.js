@@ -45,7 +45,7 @@ module.exports = {
         nav: "nav",
       },
       exposes: {},
-      shared: ["react", "react-dom", "antd"],
+      shared: ["react", "react-dom", "antd", "recoil"],
     }),
     new HtmlWebpackPlugin({
       template: "./src/index.html",

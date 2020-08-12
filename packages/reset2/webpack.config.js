@@ -1,6 +1,5 @@
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const ModuleFederationPlugin = require("webpack/lib/container/ModuleFederationPlugin");
-const CopyPlugin = require("copy-webpack-plugin");
 
 module.exports = {
   entry: "./src/index",
@@ -14,7 +13,7 @@ module.exports = {
   },
 
   output: {
-    publicPath: "http://localhost:3001/",
+    publicPath: "http://localhost:4001/",
   },
 
   resolve: {
@@ -28,26 +27,6 @@ module.exports = {
         use: ["style-loader", "css-loader"],
       },
       {
-        test: /\.less$/,
-        use: [
-          {
-            loader: "style-loader",
-          },
-          {
-            loader: "css-loader",
-          },
-          {
-            loader: "less-loader",
-            options: {
-              lessOptions: {
-                javascriptEnabled: true,
-              },
-            },
-          },
-        ],
-      },
-
-      {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
         use: {
@@ -58,20 +37,18 @@ module.exports = {
   },
 
   plugins: [
-    new CopyPlugin([{ from: "fruit", to: "fruit" }]),
     new ModuleFederationPlugin({
-      name: "home",
-      library: { type: "var", name: "home" },
+      name: "reset",
+      library: { type: "var", name: "reset" },
       filename: "remoteEntry.js",
       remotes: {
-        nav: "nav",
-        reset: "reset"
+        home: 'home'
       },
       exposes: {
-        ProductCarousel: "./src/ProductCarousel",
-        atoms: "./src/atoms",
+        ResetButton: './src/ResetButton',
+        TheBill: './src/TheBill'
       },
-      shared: ["react", "react-dom", "antd", "@ant-design/icons", "recoil"],
+      shared: ["react", "react-dom", "antd", "recoil"],
     }),
     new HtmlWebpackPlugin({
       template: "./src/index.html",
@@ -79,6 +56,6 @@ module.exports = {
   ],
 
   devServer: {
-    port: 3001,
+    port: 4001,
   },
 };
